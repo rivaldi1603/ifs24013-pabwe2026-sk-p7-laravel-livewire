@@ -49,6 +49,7 @@ Route::middleware(['throttle:1000-per-second'])->group(function () {
 
         // Admin Routes protected by Role middleware
         Route::prefix('admin')->name('admin.')->middleware('role:admin')->group(function () {
+            Route::redirect('/', '/admin/users')->name('index');
             Route::get('/users', UserList::class)->name('users');
             Route::get('/users/{user}/stocks', AdminUserStockList::class)->name('users.stocks');
         });

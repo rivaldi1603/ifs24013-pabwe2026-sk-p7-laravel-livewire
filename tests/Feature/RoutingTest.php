@@ -34,6 +34,16 @@ class RoutingTest extends TestCase
             ->assertRedirect(route('admin.users'));
     }
 
+    public function test_admin_prefix_redirects_admin_to_users_and_blocks_member_and_guest(): void
+    {
+        $admin = User::factory()->admin()->create();
+        $member = User::factory()->member()->create();
+
+        $this->get('/admin')->assertRedirect(route('login'));
+        $this->actingAs($member)->get('/admin')->assertForbidden();
+        $this->actingAs($admin)->get('/admin')->assertRedirect('/admin/users');
+    }
+
     public function test_health_check_endpoint(): void
     {
         $this->get('/up')
