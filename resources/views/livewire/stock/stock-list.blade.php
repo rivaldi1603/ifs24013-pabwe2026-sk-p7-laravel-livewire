@@ -94,7 +94,7 @@
     <!-- Filter & Search Controls -->
     <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200 mb-6 flex flex-col sm:flex-row gap-4 items-center justify-between">
         <div class="w-full sm:w-72 relative">
-            <input wire:model.live.debounce.300ms="search" type="text" placeholder="Cari nama barang, SKU, atau deskripsi..."
+            <input wire:model.live.debounce.300ms="search" id="stock-search" aria-label="Cari stok barang" type="text" placeholder="Cari nama barang, SKU, atau deskripsi..."
                 class="w-full pl-3.5 pr-9 py-2 text-sm rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
             <div wire:loading wire:target="search,statusFilter" class="absolute right-3 top-2.5">
                 <svg class="animate-spin h-4 w-4 text-blue-600" fill="none" viewBox="0 0 24 24">
@@ -105,8 +105,8 @@
         </div>
 
         <div class="flex items-center space-x-3 w-full sm:w-auto">
-            <label class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Status:</label>
-            <select wire:model.live="statusFilter"
+            <label for="statusFilter" class="text-xs font-semibold text-slate-600 uppercase tracking-wider">Status:</label>
+            <select wire:model.live="statusFilter" id="statusFilter" aria-label="Filter status stok"
                 class="px-3 py-2 text-sm rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white">
                 <option value="">Semua Status</option>
                 @foreach ($statuses as $status)
@@ -167,7 +167,7 @@
                                             Rp {{ number_format((float) $stock->price, 0, ',', '.') }}
                                         </span>
                                     @endif
-                                    <span class="text-xs text-slate-400">
+                                    <span class="text-xs text-slate-600">
                                         (Min: {{ $stock->min_stock }} {{ $stock->unit }})
                                     </span>
                                 </div>

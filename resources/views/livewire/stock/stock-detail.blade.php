@@ -46,7 +46,7 @@
 
     <!-- Cover Stock Section -->
     <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden mb-8">
-        <input type="file" wire:model="coverPhoto" id="coverPhotoInput" accept="image/*" class="hidden">
+        <input type="file" wire:model="coverPhoto" id="coverPhotoInput" aria-label="Upload cover gambar stok" accept="image/*" class="hidden">
 
         @if ($stock->cover_image_path && \Illuminate\Support\Facades\Storage::disk('public')->exists($stock->cover_image_path))
             <div class="relative group h-64 sm:h-80 w-full bg-slate-900 overflow-hidden">
@@ -62,7 +62,7 @@
             </div>
         @else
             <div class="p-8 text-center bg-gradient-to-b from-slate-50 to-white flex flex-col items-center justify-center border-b border-slate-100">
-                <h3 class="text-sm font-bold text-slate-800">Tambahkan Cover Gambar untuk Stok Barang Ini</h3>
+                <h2 class="text-sm font-bold text-slate-800">Tambahkan Cover Gambar untuk Stok Barang Ini</h2>
                 <button type="button" onclick="document.getElementById('coverPhotoInput').click()" class="mt-4 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold rounded-xl shadow-sm transition">
                     Upload Cover Gambar
                 </button>
@@ -80,28 +80,28 @@
     <div class="space-y-6">
         <div class="grid grid-cols-1 sm:grid-cols-4 gap-4">
             <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200">
-                <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider block mb-1">Status Ketersediaan</span>
+                <span class="text-xs font-semibold text-slate-600 uppercase tracking-wider block mb-1">Status Ketersediaan</span>
                 <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold border {{ \App\Features\Stock\Enums\StockStatus::tryFrom($stock->status)?->badgeClass() ?? 'bg-slate-100 text-slate-700' }}">
                     {{ \App\Features\Stock\Enums\StockStatus::tryFrom($stock->status)?->label() ?? ucfirst($stock->status) }}
                 </span>
             </div>
 
             <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200">
-                <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider block mb-1">Jumlah Stok</span>
+                <span class="text-xs font-semibold text-slate-600 uppercase tracking-wider block mb-1">Jumlah Stok</span>
                 <div class="text-sm font-semibold text-slate-800">
                     {{ $stock->quantity }} {{ $stock->unit }} (Min: {{ $stock->min_stock }})
                 </div>
             </div>
 
             <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200">
-                <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider block mb-1">Harga Satuan</span>
+                <span class="text-xs font-semibold text-slate-600 uppercase tracking-wider block mb-1">Harga Satuan</span>
                 <div class="text-sm font-semibold text-slate-800">
                     {{ $stock->price !== null ? 'Rp ' . number_format((float) $stock->price, 0, ',', '.') : 'Tidak ditentukan' }}
                 </div>
             </div>
 
             <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200">
-                <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider block mb-1">Terakhir Diperbarui</span>
+                <span class="text-xs font-semibold text-slate-600 uppercase tracking-wider block mb-1">Terakhir Diperbarui</span>
                 <div class="text-sm font-semibold text-slate-800">
                     {{ $stock->updated_at ? $stock->updated_at->format('d M Y H:i') : '-' }}
                 </div>
